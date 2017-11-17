@@ -33,6 +33,33 @@ router.get('/users/:userId', (req, res, next) => __awaiter(this, void 0, void 0,
         res.send({ ok: false, error: error.message });
     }
 }));
+router.get('/users/maps/:userId', (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+    let userId = req.params.userId;
+    try {
+        let rs = yield userModel.getLatLng(req.db, userId);
+        if (rs.length) {
+            res.send({ ok: true, lat: rs[0].lat, lng: rs[0].lng });
+        }
+        else {
+            res.send({ ok: false });
+        }
+    }
+    catch (error) {
+        res.send({ ok: false, error: error.message });
+    }
+}));
+router.put('/users/maps/:userId', (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+    let userId = req.params.userId;
+    let lat = req.body.lat;
+    let lng = req.body.lng;
+    try {
+        let rs = yield userModel.updateLatLng(req.db, userId, lat, lng);
+        res.send({ ok: true });
+    }
+    catch (error) {
+        res.send({ ok: false, error: error.message });
+    }
+}));
 router.get('/user-types', (req, res, next) => __awaiter(this, void 0, void 0, function* () {
     try {
         let rs = yield userModel.getUserTypeList(req.db);
@@ -68,6 +95,8 @@ router.post('/users', (req, res, next) => __awaiter(this, void 0, void 0, functi
             is_active: isActive,
             user_type_id: userTypeId
         };
+        req.io.emit('added-user', firstName);
+        req.io.emit('change-graph');
         yield userModel.saveUser(req.db, user);
         res.send({ ok: true });
     }
@@ -103,6 +132,8 @@ router.put('/users/:userId', (req, res, next) => __awaiter(this, void 0, void 0,
 router.delete('/users/:userId', (req, res, next) => __awaiter(this, void 0, void 0, function* () {
     try {
         let userId = req.params.userId;
+        req.io.emit('removed-user');
+        req.io.emit('change-graph');
         yield userModel.removeUser(req.db, userId);
         res.send({ ok: true });
     }
