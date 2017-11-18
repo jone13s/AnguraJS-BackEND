@@ -13,7 +13,6 @@ const jwt = new jwt_1.Jwt();
 const index_1 = require("./routes/index");
 const login_1 = require("./routes/login");
 const api_1 = require("./routes/api");
-const somsak_Api_1 = require("./routes/somsak_Api");
 const session = require('express-session');
 const socketIo = require('socket.io');
 const io = socketIo();
@@ -101,7 +100,6 @@ var authApi = (req, res, next) => {
         return res.send({ ok: false, error: 'No token!' });
     });
 };
-app.use('/somsak_Api/', authApi, somsak_Api_1.default);
 app.use('/api', authApi, api_1.default);
 app.use('/login', login_1.default);
 app.use('/', auth, index_1.default);
