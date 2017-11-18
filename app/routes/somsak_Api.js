@@ -22,4 +22,5 @@ routerX.get('/users', (req, res, next) => __awaiter(this, void 0, void 0, functi
         res.send({ ok: false, error: error.message });
     }
 }));
+exports.default = routerX;
 //# sourceMappingURL=somsak_Api.js.map

@@ -134,7 +134,7 @@ var authApi = (req, res, next) => {
     })
 }
 
-app.use('/api', authApi, api);
+app.use('/api', authApi, api, somsak_Api);
 app.use('/login', login);
 app.use('/', auth, index);
 

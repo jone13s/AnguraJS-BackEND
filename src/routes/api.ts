@@ -11,7 +11,9 @@ const userTypeModel = new UserTypeModel();
 router.get('/users', async(req, res, next) => {
 
   try {
+    //let rs = await userModel.somsak_getUsers(req.db);
     let rs = await userModel.getUsers(req.db);
+    
     res.send({ok: true, rows: rs});
   } catch (error) {
     res.send({ok:false, error: error.message});
