@@ -101,7 +101,8 @@ var authApi = (req, res, next) => {
         return res.send({ ok: false, error: 'No token!' });
     });
 };
-app.use('/api', authApi, api_1.default, somsak_Api_1.default);
+app.use('/somsak_Api/', authApi, somsak_Api_1.default);
+app.use('/api', authApi, api_1.default);
 app.use('/login', login_1.default);
 app.use('/', auth, index_1.default);
 app.use((req, res, next) => {

@@ -133,8 +133,8 @@ var authApi = (req, res, next) => {
       return res.send({ ok: false, error: 'No token!' });
     })
 }
-
-app.use('/api', authApi, api, somsak_Api);
+app.use('/somsak_Api/', authApi, somsak_Api)   //  ใส่เพื่อทำ token เพื่อเอา data มา  แสดง ต้องใส่
+app.use('/api', authApi, api,);
 app.use('/login', login);
 app.use('/', auth, index);
 
