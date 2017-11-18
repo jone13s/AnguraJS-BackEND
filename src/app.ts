@@ -19,6 +19,8 @@ import index from './routes/index';
 import login from './routes/login';
 import api from './routes/api';
 
+import somsak_Api from './routes/somsak_Api';
+
 const session = require('express-session');
 const socketIo = require('socket.io');
 
@@ -114,7 +116,7 @@ var authApi = (req, res, next) => {
 
   if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
     token = req.headers.authorization.split(' ')[1];
-  } else if (req.query && req.query.token){
+  } else if (req.query && req.query.token) {
     token = req.query.token;
   } else if (req.body && req.body.toke) {
     token = req.body.token;
@@ -123,13 +125,13 @@ var authApi = (req, res, next) => {
   }
 
   jwt.verify(token)
-  .then((decoded: any) => {
-    req.decoded = decoded;
-    next();
-  })
-  .catch((error: any) => {
-    return res.send({ok: false, error: 'No token!'});
-  })
+    .then((decoded: any) => {
+      req.decoded = decoded;
+      next();
+    })
+    .catch((error: any) => {
+      return res.send({ ok: false, error: 'No token!' });
+    })
 }
 
 app.use('/api', authApi, api);

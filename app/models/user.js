@@ -6,6 +6,11 @@ class UserModel {
             .select('u.user_id', 'u.birth', 'u.sex', 'u.is_active', 'u.username', 'u.first_name', 'u.last_name', 'ut.user_type_name')
             .leftJoin('user_types as ut', 'ut.user_type_id', 'u.user_type_id');
     }
+    somsak_getUsers(db) {
+        return db('users as u')
+            .select('u.user_id', 'u.birth', 'u.sex', 'u.is_active', 'u.username', 'u.first_name', 'u.last_name', 'ut.user_type_name')
+            .leftJoin('user_types as ut', 'ut.user_type_id', 'u.user_type_id');
+    }
     search(db, query) {
         let _query = '%' + query + '%';
         return db('users as u')
