@@ -9,9 +9,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
-const router = express.Router();
 const crypto = require("crypto");
 const user_1 = require("./../models/user");
+const router = express.Router();
 const userModel = new user_1.UserModel();
 const userTypeModel = new user_1.UserTypeModel();
 router.get('/users', (req, res, next) => __awaiter(this, void 0, void 0, function* () {

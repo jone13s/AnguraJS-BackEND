@@ -1,10 +1,9 @@
 
 import * as express from 'express';
-const router = express.Router();
 import * as crypto from 'crypto';
-
 import { UserModel, UserTypeModel } from './../models/user';
 
+const router = express.Router();
 const userModel = new UserModel();
 const userTypeModel = new UserTypeModel();
 

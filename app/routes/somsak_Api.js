@@ -11,10 +11,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const user_1 = require("./../models/user");
 const routerX = express.Router();
-const UserMX = new user_1.UserModel();
+const userModel = new user_1.UserModel();
+const userTypeModel = new user_1.UserTypeModel();
 routerX.get('/users', (req, res, next) => __awaiter(this, void 0, void 0, function* () {
     try {
-        let rs = yield UserMX.somsak_getUsers(req.db);
+        let rs = yield userModel.somsak_getUsers(req.db);
         res.send({ ok: true, rows: rs });
     }
     catch (error) {
